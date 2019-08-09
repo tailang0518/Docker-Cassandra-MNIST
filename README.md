@@ -70,7 +70,9 @@ USE mnist_key;
 select*from record_data;
 ```
 
+:blush:
 
+`Just a kindly remainder, we can directly find the project_video and project_report in docker_MNIST/summary folder. `
 
 
 
