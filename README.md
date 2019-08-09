@@ -55,7 +55,7 @@ __6. find the Appilcation container Ports.__
 docker ps 
 ```
 
-__7. submit the Ports such as 0.0.0.0:8000 to any web browser.__
+__7. submit the Ports (it should be 0.0.0.0:8000) to any web browser.__
 
 __8. call cqlsh shell.__ 
 
