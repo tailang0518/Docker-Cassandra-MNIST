@@ -1,5 +1,8 @@
 # Introduction 
 
+This project is constructed by two docker Containers: an Application Docker Container and a Database Docker Container.
+While the user submits ports in any browser, the Flask Router will link to the HTML5 file. In the HTML5 file, there is a canvas which user can use mouse to draw. The Router then saves the handwritten image and requests the prediction from the MNIST Keras model. After the result returns, the Router forwards the result to HTML5 and show it to user via browser and submits all two data to the Cassandra Database Container through the Docker Network Bridge.
+
 The main job for this poject is to recognize the user's handwritten digit. User can draw the digit in the canvas and press `"predict it"` button to start to predict the image, and it will return the result on the right side of the page. User can also press `"clear it"` button to clear their drawing if he is not satisify with it. Each time, the prediction and date will be recorded in the Cassandra database. 
 
 # DEMO
