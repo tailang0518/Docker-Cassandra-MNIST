@@ -5,13 +5,7 @@ While the user goes to the port and draw the digit in the canvas,the router then
 
 Finally, the application currently uses a MNIST model and get to 99.33% test accuracy after 4 epochs.
 
-*The following image is what this project looks like, you can click the image and download the raw file to watch the video.* 
-
-
-[![](https://github.com/tailang0518/MNIST/blob/master/docker_MNIST/summary/Screen%20Shot%20.png)](https://github.com/tailang0518/MNIST/blob/master/docker_MNIST/summary/mnistProject_1.mp4)
-
-
-
+![](https://github.com/tailang0518/Docker-Cassandra-MNIST/blob/master/docker_MNIST/summary/demo.gif)
 
 # Preparation
 
