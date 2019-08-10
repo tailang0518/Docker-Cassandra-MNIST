@@ -77,7 +77,7 @@ canvas.onmousedown=function(evt){
  For the event of mouse move. 
  
  ```java
- anvas.onmousemove=function(evt){
+ canvas.onmousemove=function(evt){
 			if(flag){
 				var endX=evt.clientX-this.offsetLeft;
 				var endY=evt.clientY-this.offsetTop;
