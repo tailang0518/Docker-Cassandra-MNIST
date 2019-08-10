@@ -7,9 +7,9 @@ The main job for this poject is to recognize the user's handwritten digit. User 
 
 ## __WITH DOCKER AND CASSANDRA FEATURE__
 
-`how to use docker and cassandra database is at the bottom Preparation Part` 
+`how to use docker and cassandra database feature is at the bottom Preparation Part` 
 
-![](https://github.com/tailang0518/Docker-Cassandra-MNIST/blob/master/docker_MNIST/summary/demo.gif)
+![](https://github.com/tailang0518/Docker-Cassandra-MNIST/blob/master/docker_MNIST/summary/DEMO.GIF)
 
 
 # Background
@@ -37,7 +37,63 @@ loaded_model = model_from_json(mnist_model)
 loaded_model.load_weights("model_mnist.h5")
 ```
 
-We use HTML and CSS to design the UI of this project. Since it includes a canvas, we also use Javascript to catch the event of mouse on the canvas, so that user can draw on HTML5 canvas using a mouse. 
+We use `HTML5` and `CSS` to design the UI of this project. Since it includes a canvas, we also use Javascript to catch the event of mouse on the canvas, so that user can draw on HTML5 canvas using a mouse. 
+
+The Canvas part is the most difficult part in UI design. 
+
+First we create a 280*280 Canvas in the HTML5 file index.html 
+
+```python
+<canvas id="canvas" width="280" height="280" style="border:8px solid; float: left; margin: 140px; margin-top:360px;  border-radius: 5px; cursor: crosshair;"></canvas>
+```
+
+`index.js` includes all the events of the mouse movements. Including mouse press down, mouse press up, mouse move and mouse out of the canvas. 
+
+We set a `boolean flag` and assert it to be false at first so that we can make sure whether the mouse can be used to draw. 
+If mouse press up or out of the canvas, it will lose the ability to draw in the canvas. 
+
+For the event of mouse press down. 
+
+```java
+canvas.onmousedown=function(evt){
+
+				var BeginX=evt.clientX-this.offsetLeft;
+				var BeginY=evt.clientY-this.offsetTop;
+				context.beginPath();
+				context.moveTo(BeginX, BeginY);
+				flag=true;
+
+		}
+ ```
+ 
+ For the event of mouse press up. 
+ 
+ ```java
+ canvas.onmouseup=function(){
+			flag=false;
+		}
+ ```
+ 
+ For the event of mouse move. 
+ 
+ ```java
+ anvas.onmousemove=function(evt){
+			if(flag){
+				var endX=evt.clientX-this.offsetLeft;
+				var endY=evt.clientY-this.offsetTop;
+				context.lineTo(endX, endY);
+				context.stroke();
+			}
+		}
+ ```
+ 
+ For the event of mouse out. 
+ 
+ ```java
+ canvas.onmouseout=function(){
+			flag=false;
+		}
+ ```
 
 The main UI looks like the following image. 
 
