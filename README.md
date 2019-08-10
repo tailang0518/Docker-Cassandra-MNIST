@@ -1,15 +1,54 @@
-# MNIST
-In this project, the main job is to recognize the handwritten digit by the database which was construced by Keras. 
+# Introduction 
 
-While the user goes to the port and draw the digit in the canvas,the router then saves the image and requests the prediction from the MNIST Keras model. After the result returns, the Router forwards the result to the website and submits the predict result and datetime to the Cassandra Database Container through the Docker Network Bridge.
+The main job for this poject is to recognize the user's handwritten digit. User can draw the digit in the canvas and press `"predict it"` button to start to predict the image, and it will return the result on the right side of the page. User can also press `"clear it"` button to clear their drawing if he is not satisify with it. Each time, the prediction and date will be recorded in the Cassandra database. 
 
-Finally, the application currently uses a MNIST model and get to 99.33% test accuracy after 4 epochs.
+# DEMO
+![](https://github.com/tailang0518/Docker-Cassandra-MNIST/blob/master/docker_MNIST/summary/UI.gif)
+
+## __WITH DOCKER AND CASSANDRA FEATURE__
+
+`how to use docker and cassandra database is at the bottom Preparation Part` 
 
 ![](https://github.com/tailang0518/Docker-Cassandra-MNIST/blob/master/docker_MNIST/summary/demo.gif)
 
-# Preparation
 
-This project used two Docker containers, Cassandra database container and our Application container. 
+# Background
+
+This project is deployed by Docker and used Canssandra database to record the predictions of user's handwritten digit and datetime. It used two Docker containers, Cassandra database container and our Application container, and they are connected by the Docker Network Bridge, which allows the communication between them.
+
+It used Keras with backend TensorFlow to construct the MNIST model so that it can classify the user's handwritten digit. This MNIST model gets to 99.33% test accuracy after 4 epochs. *User can run mnist_train.py first to test the accuracy.* 
+
+We used JSON to save the MNIST model. Sicne Keras separates the concerns of saving model architecture and saving model weights. Thus, we saved MNIST model architecture to JSON and model weights to HDF5 format. 
+
+```python
+model_json = model.to_json()
+with open("model_mnist.json", "w") as json_file:
+    json_file.write(model_json)
+
+model.save_weights("model_mnist.h5")
+```
+Before MNIST model compiling, we need to open JSON file, read it and load the model. 
+
+```python
+file = open('model_mnist.json', 'r')
+mnist_model = file.read()
+file.close()
+loaded_model = model_from_json(mnist_model)
+loaded_model.load_weights("model_mnist.h5")
+```
+
+We use HTML and CSS to design the UI of this project. Since it includes a canvas, we also use Javascript to catch the event of mouse on the canvas, so that user can draw on HTML5 canvas using a mouse. 
+
+The main UI looks like the following image. 
+
+![](https://github.com/tailang0518/Docker-Cassandra-MNIST/blob/master/docker_MNIST/summary/screenshot2.png)
+
+# Requirements  
+- [x] Python (3 or more) 
+- [x] Docker
+- [x] Cassandra Database
+
+# Preparation 
 
 To run project properly, here are several preparetion that you need to follow. 
 
